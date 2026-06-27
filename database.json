@@ -1,0 +1,331 @@
+{
+  "users": [
+    {
+      "id": "usr_admin",
+      "email": "admin@smartcare.com",
+      "password": "password123",
+      "name": "System Administrator",
+      "role": "admin"
+    },
+    {
+      "id": "usr_doc1",
+      "email": "jenkins@smartcare.com",
+      "password": "password123",
+      "name": "Dr. Sarah Jenkins",
+      "role": "doctor",
+      "profileId": "doc_1"
+    },
+    {
+      "id": "usr_doc2",
+      "email": "chen@smartcare.com",
+      "password": "password123",
+      "name": "Dr. Robert Chen",
+      "role": "doctor",
+      "profileId": "doc_2"
+    },
+    {
+      "id": "usr_doc3",
+      "email": "rahman@smartcare.com",
+      "password": "password123",
+      "name": "Dr. Aisha Rahman",
+      "role": "doctor",
+      "profileId": "doc_3"
+    },
+    {
+      "id": "usr_pat1",
+      "email": "patient@smartcare.com",
+      "password": "password123",
+      "name": "John Doe",
+      "role": "patient",
+      "profileId": "pat_1"
+    },
+    {
+      "id": "usr_1782559828341",
+      "email": "abc@gmail.com",
+      "password": "123456",
+      "name": "hehe",
+      "role": "patient",
+      "profileId": "pat_1782559828341"
+    }
+  ],
+  "doctors": [
+    {
+      "id": "doc_1",
+      "name": "Dr. Sarah Jenkins",
+      "email": "jenkins@smartcare.com",
+      "department": "Cardiology",
+      "specialization": "Interventional Cardiology & Heart Failure",
+      "experience": 14,
+      "consultationFee": 150,
+      "licenseNumber": "MD-928312",
+      "bio": "Dr. Jenkins is a board-certified cardiologist specializing in preventive heart health and minimally invasive cardiovascular interventions. She holds over 14 years of expert medical care.",
+      "rating": 4.9,
+      "queueLength": 2,
+      "estimatedWaitPerPatient": 15,
+      "weeklySchedule": [
+        {
+          "day": "Monday",
+          "start": "09:00",
+          "end": "17:00",
+          "active": true
+        },
+        {
+          "day": "Tuesday",
+          "start": "09:00",
+          "end": "17:00",
+          "active": true
+        },
+        {
+          "day": "Wednesday",
+          "start": "09:00",
+          "end": "17:00",
+          "active": true
+        },
+        {
+          "day": "Thursday",
+          "start": "13:00",
+          "end": "17:00",
+          "active": true
+        },
+        {
+          "day": "Friday",
+          "start": "09:00",
+          "end": "12:00",
+          "active": true
+        },
+        {
+          "day": "Saturday",
+          "start": "09:00",
+          "end": "12:00",
+          "active": false
+        },
+        {
+          "day": "Sunday",
+          "start": "09:00",
+          "end": "12:00",
+          "active": false
+        }
+      ]
+    },
+    {
+      "id": "doc_2",
+      "name": "Dr. Robert Chen",
+      "email": "chen@smartcare.com",
+      "department": "Pediatrics",
+      "specialization": "Neonatology & Pediatric Allergy",
+      "experience": 10,
+      "consultationFee": 120,
+      "licenseNumber": "MD-741289",
+      "bio": "Dr. Robert Chen is passionate about childhood wellness. He treats children of all ages with a gentle, patient-focused approach, specializing in complex allergy treatments and neonatology care.",
+      "rating": 4.8,
+      "queueLength": 1,
+      "estimatedWaitPerPatient": 15,
+      "weeklySchedule": [
+        {
+          "day": "Monday",
+          "start": "08:00",
+          "end": "16:00",
+          "active": true
+        },
+        {
+          "day": "Tuesday",
+          "start": "08:00",
+          "end": "16:00",
+          "active": true
+        },
+        {
+          "day": "Wednesday",
+          "start": "08:00",
+          "end": "16:00",
+          "active": false
+        },
+        {
+          "day": "Thursday",
+          "start": "08:00",
+          "end": "16:00",
+          "active": true
+        },
+        {
+          "day": "Friday",
+          "start": "08:00",
+          "end": "16:00",
+          "active": true
+        },
+        {
+          "day": "Saturday",
+          "start": "09:00",
+          "end": "13:00",
+          "active": true
+        },
+        {
+          "day": "Sunday",
+          "start": "09:00",
+          "end": "12:00",
+          "active": false
+        }
+      ]
+    },
+    {
+      "id": "doc_3",
+      "name": "Dr. Aisha Rahman",
+      "email": "rahman@smartcare.com",
+      "department": "Neurology",
+      "specialization": "Epilepsy, Neuro-Immunology & Migraines",
+      "experience": 12,
+      "consultationFee": 180,
+      "licenseNumber": "MD-652391",
+      "bio": "Dr. Aisha Rahman provides comprehensive neurological services. Her practice focuses heavily on modern diagnosis and treatment of headaches, sleep anomalies, epilepsy, and neurological rehabilitation.",
+      "rating": 4.7,
+      "queueLength": 0,
+      "estimatedWaitPerPatient": 20,
+      "weeklySchedule": [
+        {
+          "day": "Monday",
+          "start": "10:00",
+          "end": "18:00",
+          "active": true
+        },
+        {
+          "day": "Tuesday",
+          "start": "10:00",
+          "end": "18:00",
+          "active": false
+        },
+        {
+          "day": "Wednesday",
+          "start": "10:00",
+          "end": "18:00",
+          "active": true
+        },
+        {
+          "day": "Thursday",
+          "start": "10:00",
+          "end": "18:00",
+          "active": true
+        },
+        {
+          "day": "Friday",
+          "start": "10:00",
+          "end": "18:00",
+          "active": true
+        },
+        {
+          "day": "Saturday",
+          "start": "10:00",
+          "end": "14:00",
+          "active": false
+        },
+        {
+          "day": "Sunday",
+          "start": "10:00",
+          "end": "14:00",
+          "active": false
+        }
+      ]
+    }
+  ],
+  "patients": [
+    {
+      "id": "pat_1",
+      "name": "John Doe",
+      "email": "patient@smartcare.com",
+      "phone": "+1 (555) 123-4567",
+      "age": 34,
+      "gender": "Male",
+      "medicalHistory": "History of minor hypertension. Mild seasonal pollen allergies. Non-smoker."
+    },
+    {
+      "id": "pat_1782559828341",
+      "name": "hehe",
+      "email": "abc@gmail.com",
+      "phone": "+91 6789089761",
+      "age": 30,
+      "gender": "Male",
+      "medicalHistory": "No previous major chronic conditions."
+    }
+  ],
+  "appointments": [
+    {
+      "id": "apt_1",
+      "doctorId": "doc_1",
+      "patientId": "pat_1",
+      "doctorName": "Dr. Sarah Jenkins",
+      "patientName": "John Doe",
+      "date": "2026-06-27",
+      "timeSlot": "10:00",
+      "status": "booked",
+      "tokenNumber": 101
+    }
+  ],
+  "queue": [
+    {
+      "tokenNumber": 101,
+      "appointmentId": "apt_1",
+      "patientId": "pat_1",
+      "patientName": "John Doe",
+      "doctorId": "doc_1",
+      "doctorName": "Dr. Sarah Jenkins",
+      "status": "waiting",
+      "estimatedWaitTime": 15
+    }
+  ],
+  "records": [
+    {
+      "id": "rec_1",
+      "patientId": "pat_1",
+      "patientName": "John Doe",
+      "doctorId": "doc_1",
+      "doctorName": "Dr. Sarah Jenkins",
+      "date": "2026-05-15",
+      "department": "Cardiology",
+      "diagnosis": "Mild Essential Hypertension",
+      "treatment": "Initiated low-dose ACE inhibitor therapy (Lisinopril 10mg daily) and advised sodium restriction.",
+      "symptoms": "Occasional headaches and mild fatigue during exertion.",
+      "vitals": {
+        "bloodPressure": "138/88 mmHg",
+        "heartRate": "72 bpm",
+        "temperature": "98.6 °F",
+        "weight": "82 kg"
+      },
+      "notes": "Patient advised to maintain a blood pressure diary and return for a follow-up in 4 weeks."
+    },
+    {
+      "id": "rec_2",
+      "patientId": "pat_1",
+      "patientName": "John Doe",
+      "doctorId": "doc_2",
+      "doctorName": "Dr. Robert Chen",
+      "date": "2026-03-10",
+      "department": "Pediatrics",
+      "diagnosis": "Seasonal Allergic Rhinitis",
+      "treatment": "Prescribed Cetirizine 10mg daily and Fluticasone propionate nasal spray.",
+      "symptoms": "Severe sneezing, nasal congestion, and itchy, watery eyes for 2 weeks.",
+      "vitals": {
+        "bloodPressure": "122/78 mmHg",
+        "heartRate": "68 bpm",
+        "temperature": "98.4 °F",
+        "weight": "81.5 kg"
+      },
+      "notes": "Avoid outdoor activities during high pollen count periods."
+    },
+    {
+      "id": "rec_3",
+      "patientId": "pat_1",
+      "patientName": "John Doe",
+      "doctorId": "doc_3",
+      "doctorName": "Dr. Aisha Rahman",
+      "date": "2025-11-20",
+      "department": "Neurology",
+      "diagnosis": "Tension Headache",
+      "treatment": "Recommended stress management, adequate hydration, and ibuprofen 400mg as needed for acute pain.",
+      "symptoms": "Bilateral, band-like headache recurring 2-3 times per week, associated with occupational stress.",
+      "vitals": {
+        "bloodPressure": "120/80 mmHg",
+        "heartRate": "65 bpm",
+        "temperature": "98.5 °F",
+        "weight": "83 kg"
+      },
+      "notes": "Neurological examination is completely normal. No flags for secondary headache."
+    }
+  ]
+}

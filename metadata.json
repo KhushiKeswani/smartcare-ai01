@@ -1,0 +1,6 @@
+{
+  "name": "SmartCare AI",
+  "description": "An AI-powered Doctor Management System featuring a Symptom Checker, Doctor Recommendations, Queue Prediction, Medical Report Summarizer, and intelligent Hospital Assistant chatbot.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

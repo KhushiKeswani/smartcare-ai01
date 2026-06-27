@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Google AI Studio App</title>
+    <script>
+      // Early-stage interceptor to prevent MetaMask extension and provider errors from bubbling up
+      (function() {
+        const suppressKeywords = ['metamask', 'ethereum', 'wallet', 'rpc', 'provider', 'web3'];
+        
+        function shouldSuppress(msg) {
+          if (!msg) return false;
+          const lower = String(msg).toLowerCase();
+          return suppressKeywords.some(keyword => lower.includes(keyword));
+        }
+
+        // 1. Suppress global errors
+        window.addEventListener('error', function(event) {
+          const msg = event.message || (event.error && event.error.message) || '';
+          if (shouldSuppress(msg)) {
+            event.stopImmediatePropagation();
+            event.preventDefault();
+          }
+        }, true);
+
+        // 2. Suppress unhandled promise rejections
+        window.addEventListener('unhandledrejection', function(event) {
+          const reason = event.reason;
+          if (reason) {
+            const msg = (typeof reason === 'string' ? reason : reason.message || reason.stack || '').toLowerCase();
+            if (shouldSuppress(msg)) {
+              event.stopImmediatePropagation();
+              event.preventDefault();
+            }
+          }
+        }, true);
+
+        // 3. Intercept console.error and console.warn
+        const originalConsoleError = console.error;
+        console.error = function(...args) {
+          const joinStr = args.map(a => String(a)).join(' ');
+          if (shouldSuppress(joinStr)) {
+            // Silently swallow MetaMask / Web3 / wallet errors
+            return;
+          }
+          originalConsoleError.apply(console, args);
+        };
+
+        const originalConsoleWarn = console.warn;
+        console.warn = function(...args) {
+          const joinStr = args.map(a => String(a)).join(' ');
+          if (shouldSuppress(joinStr)) {
+            return;
+          }
+          originalConsoleWarn.apply(console, args);
+        };
+
+        // 4. Mock window.ethereum to handle inquiries gracefully without crashing or throwing
+        if (typeof window !== 'undefined') {
+          try {
+            Object.defineProperty(window, 'ethereum', {
+              configurable: true,
+              enumerable: true,
+              get: function() {
+                return {
+                  isMetaMask: true,
+                  request: async function(args) {
+                    if (args && args.method === 'eth_requestAccounts') {
+                      return ['0x0000000000000000000000000000000000000000'];
+                    }
+                    if (args && args.method === 'eth_accounts') {
+                      return ['0x0000000000000000000000000000000000000000'];
+                    }
+                    return null;
+                  },
+                  on: function() {},
+                  removeListener: function() {},
+                  enable: async function() {
+                    return ['0x0000000000000000000000000000000000000000'];
+                  }
+                };
+              },
+              set: function() {}
+            });
+          } catch (e) {
+            // Ignore descriptor modification errors
+          }
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
