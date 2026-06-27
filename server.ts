@@ -1278,7 +1278,7 @@ Guidelines:
     });
   }
 
-  if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+  if (!process.env.VERCEL) {
     startServer().catch(err => {
       console.error("Failed to start server", err);
     });
