@@ -1,7 +1,6 @@
 import express from 'express';
 import path from 'path';
 import fs from 'fs';
-import { createServer as createViteServer } from 'vite';
 import { GoogleGenAI, Type } from '@google/genai';
 
 // Simple JWT encoder/decoder
@@ -98,7 +97,9 @@ async function generateGeminiContentWithFallback(params: {
   throw lastError || new Error("AI generation failed");
 }
 
-const DB_FILE = path.join(process.cwd(), 'database.json');
+const DB_FILE = process.env.VERCEL
+  ? '/tmp/database.json'
+  : path.join(process.cwd(), 'database.json');
 
 // Initial seed data
 const initialData = {
@@ -223,6 +224,17 @@ const initialData = {
 function readDB(): typeof initialData {
   try {
     if (!fs.existsSync(DB_FILE)) {
+      // On Vercel, copy packaged database.json (if present) to the writeable /tmp path
+      const packagedDbPath = path.join(process.cwd(), 'database.json');
+      if (process.env.VERCEL && fs.existsSync(packagedDbPath)) {
+        try {
+          const content = fs.readFileSync(packagedDbPath, 'utf-8');
+          fs.writeFileSync(DB_FILE, content);
+          return JSON.parse(content);
+        } catch (seedErr) {
+          console.error("Error seeding /tmp/database.json from packaged db", seedErr);
+        }
+      }
       fs.writeFileSync(DB_FILE, JSON.stringify(initialData, null, 2));
       return initialData;
     }
@@ -242,11 +254,10 @@ function writeDB(data: typeof initialData) {
   }
 }
 
-async function startServer() {
-  const app = express();
-  const PORT = 3000;
+const app = express();
+const PORT = 3000;
 
-  // Middleware
+// Middleware
   app.use(express.json({ limit: '10mb' }));
 
   // Helper auth middleware
@@ -1246,25 +1257,31 @@ Guidelines:
   });
 
   // Serve static files in production / Vite middleware in dev
-  if (process.env.NODE_ENV !== "production") {
-    const vite = await createViteServer({
-      server: { middlewareMode: true },
-      appType: "spa",
-    });
-    app.use(vite.middlewares);
-  } else {
-    const distPath = path.join(process.cwd(), 'dist');
-    app.use(express.static(distPath));
-    app.get('*', (req, res) => {
-      res.sendFile(path.join(distPath, 'index.html'));
+  async function startServer() {
+    if (process.env.NODE_ENV !== "production") {
+      const { createServer: createViteServer } = await import('vite');
+      const vite = await createViteServer({
+        server: { middlewareMode: true },
+        appType: "spa",
+      });
+      app.use(vite.middlewares);
+    } else {
+      const distPath = path.join(process.cwd(), 'dist');
+      app.use(express.static(distPath));
+      app.get('*', (req, res) => {
+        res.sendFile(path.join(distPath, 'index.html'));
+      });
+    }
+
+    app.listen(PORT, "0.0.0.0", () => {
+      console.log(`SmartCare AI server running on port ${PORT}`);
     });
   }
 
-  app.listen(PORT, "0.0.0.0", () => {
-    console.log(`SmartCare AI server running on port ${PORT}`);
-  });
-}
+  if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+    startServer().catch(err => {
+      console.error("Failed to start server", err);
+    });
+  }
 
-startServer().catch(err => {
-  console.error("Failed to start server", err);
-});
+  export default app;
